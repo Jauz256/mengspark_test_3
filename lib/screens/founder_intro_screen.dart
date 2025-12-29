@@ -84,7 +84,7 @@ class FounderIntroScreen extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          // Photo placeholder
+                          // Photo
                           Container(
                             width: 80,
                             height: 80,
@@ -93,8 +93,23 @@ class FounderIntroScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(AppBorderRadius.xl),
                               border: Border.all(color: AppColors.purple.withValues(alpha: 0.3)),
                             ),
-                            child: const Center(
-                              child: Text('👤', style: TextStyle(fontSize: 40)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(AppBorderRadius.xl),
+                              child: Image.network(
+                                founder.photo,
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) => const Center(
+                                  child: Text('👤', style: TextStyle(fontSize: 40)),
+                                ),
+                                loadingBuilder: (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return const Center(
+                                    child: Text('👤', style: TextStyle(fontSize: 40)),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           const SizedBox(height: AppSpacing.md),

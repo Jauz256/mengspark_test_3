@@ -78,7 +78,7 @@ class FounderListScreen extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/founder-intro',
-                        arguments: founder.id,
+                        arguments: {'founderId': founder.id},
                       );
                     },
                   );

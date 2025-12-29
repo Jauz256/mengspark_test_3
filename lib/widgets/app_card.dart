@@ -287,7 +287,7 @@ class _FounderCardState extends State<FounderCard> {
           ),
           child: Row(
             children: [
-              // Photo placeholder (circle with icon)
+              // Photo
               Container(
                 width: 64,
                 height: 64,
@@ -296,8 +296,23 @@ class _FounderCardState extends State<FounderCard> {
                   borderRadius: BorderRadius.circular(AppBorderRadius.lg),
                   border: Border.all(color: AppColors.purple.withValues(alpha: 0.3)),
                 ),
-                child: const Center(
-                  child: Text('👤', style: TextStyle(fontSize: 32)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppBorderRadius.lg),
+                  child: Image.network(
+                    widget.photoUrl,
+                    width: 64,
+                    height: 64,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Center(
+                      child: Text('👤', style: TextStyle(fontSize: 32)),
+                    ),
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: Text('👤', style: TextStyle(fontSize: 32)),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
